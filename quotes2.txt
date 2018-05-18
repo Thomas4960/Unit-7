@@ -1,16 +1,18 @@
-"This is a quote 1" - Person
-- A
-"This is a quote 2" - Person
-- A
-"This is a quote 3" - Person
-- B
-"This is a quote 4" - Person
-- B
-"This is a quote 5" - Person
-- B
-"This is a quote 6" - Person
-- C
-"This is a quote 7" - Person
-- D
-"This is a quote 8" - Person
-- Z
+"e=mc^2" - Albert Einstein
+- ALBERT EINSTEIN
+"Im at work" - Barry the Bee
+- BARRY THE BEE
+"Skrrt" - Car
+- CAR
+"Rawr XD" - emo kids
+- EMO KIDS
+"Reee" - Normies
+- NORMIES
+"OOF" - roblox
+- ROBLOX
+"Physics is fun" - said no one ever
+- SAID NO ONE EVER
+"Hey now your an allstar!" - Smashmouth
+- SMASHMOUTH
+"no u" - Unknown
+- UNKNOWN
