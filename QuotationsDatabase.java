@@ -187,12 +187,17 @@ public class QuotationsDatabase {
             }
         }
         fileWriter1 = new PrintWriter(new FileWriter(fileName));
+        //counter for quotes, stops loop when there are no more quotes to add
         for (int j = 0; j < quotes.storage.size(); j++)
         {
+            //adds a quote from quote arraylist
             fileWriter1.println(quotes.storage.get(j));
+            //then adds its author from the author arraylist
             fileWriter1.println("- "+quotes.authorList.get(j));
         }
+        //closes filewriter
         fileWriter1.close();
+        //exits program
         System.exit(0);
     }
 }

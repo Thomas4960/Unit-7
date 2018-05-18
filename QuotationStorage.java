@@ -29,7 +29,9 @@ public class QuotationStorage {
     //method to remove quote
     public void removeQuote(String quoteStr)
     {
+        //user inputs a selected quote. The index value of said quote is obtained
         indexNum = storage.indexOf(quoteStr);
+        //.remove is used with the index position to remove both the author and the quote
         storage.remove(indexNum);
         authorList.remove(indexNum);
 
@@ -37,8 +39,12 @@ public class QuotationStorage {
     //method to add quote
     public void addQuote(String auth, String quote)
     {
+        //gets the user inputted quote and name
+        //adds "" marks around the quote followed by - author and adds it to the
+        //quotes arraylist
         quoteStr = "\""+quote+"\" - "+auth;
         storage.add(quoteStr);
+        //authors name is added to the author list array
         authorList.add(auth.toUpperCase());
         sort();
     }
@@ -46,12 +52,19 @@ public class QuotationStorage {
     public void authorIndex()
     {
        authIndex.clear();
+       //counter to look through all authors
+       //ensures author name doesnt appear more than once
        for (int c = 0; c < authorList.size(); c++)
        {
            if (c == 0)
            {
+               //when the rogram first starts, the first object is added because
+               //there is no prior object to compare to to check for duplicates
                authIndex.add(authorList.get(c));
            }
+            //since array is sorted, if the author's name has already been printed,
+            //it which is shown by c-1, it will skip it so that there will be no
+            //duplciate author names
            else if (!authorList.get(c).equalsIgnoreCase(authorList.get(c-1)))
            {
                authIndex.add(authorList.get(c));
@@ -63,11 +76,16 @@ public class QuotationStorage {
     {
         //sorted linear search
         int k;
+        //intitailizes temporary arraylist to store the index positions of quotes
+        //by a specific author
         ArrayList<Integer> quoteIndex = new ArrayList();
         for(k = 0; k < authorList.size(); k++){
+            // if a quote is said by the author they are looking for, it gets
+            //the index position represented by k
             if(authorList.get(k).equalsIgnoreCase(V)) {
                 quoteIndex.add(k);
             }
+            //if the author's name value is passed, it will break the loop
             if(authorList.get(k).compareTo(V)> 0){
                 break;
             }
@@ -83,6 +101,8 @@ public class QuotationStorage {
         }
         //bubble sort
         public void sort() {
+            //sorts the author array by comparing its values
+            //goes to swap after determining that element > element+1
             for (int pass = 1; pass < authorList.size(); pass++) {
                 for (int element=0;element<authorList.size()-1;element++) {
                     if (authorList.get(element).compareTo(authorList.get(element + 1)) > 0) {
@@ -91,12 +111,19 @@ public class QuotationStorage {
                 }
             }
       }
-
+        //swap method for sort
       public void swap(int first, int second) {
+          //two swaps are performed, one to swap author list and the other to
+          //swap the quotes because they are stored seperately
+          //first strings hold the first author's name and the first quote
             String holdAuth = authorList.get(first);
             String holdQuot = storage.get(first);
+            //sets the quote and author name in the first position to the 
+            //quote and author in the second postition
             authorList.set(first, authorList.get(second));
             storage.set(first, storage.get(second));
+            //sets the quote and author in the second  position to the quote
+            //and author in the first position
             authorList.set(second, holdAuth);
             storage.set(second, holdQuot);
       } 
