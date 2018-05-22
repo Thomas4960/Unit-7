@@ -18,14 +18,16 @@ public class QuotationStorage {
         storage = storage_;
         authorList = authorList_;
     }
+    
     //toString to print all quotes out
     public String toString() {
         String output = "";
         for(int i = 0; i < storage.size(); i++) {
-            output += "[" + i + "] " + storage.get(i) + "\n";
+            output += "[" + i + "] " + storage.get(i)+"\n";
         }
         return output;
     }
+    
     //method to remove quote
     public void removeQuote(String quoteStr)
     {
@@ -36,6 +38,7 @@ public class QuotationStorage {
         authorList.remove(indexNum);
 
     }
+    
     //method to add quote
     public void addQuote(String auth, String quote)
     {
@@ -48,6 +51,7 @@ public class QuotationStorage {
         authorList.add(auth.toUpperCase());
         sort();
     }
+    
     //generates list of all authors used for search by author
     public void authorIndex()
     {
@@ -71,6 +75,7 @@ public class QuotationStorage {
            }
        }
     }
+    
     //searches for quotes by author selected in prior method
     public void search(String V)
     {
@@ -91,7 +96,7 @@ public class QuotationStorage {
             }
         }
         //prints out all quotes by specified author.
-        System.out.println("All the quotes by "+V+" are:");
+        System.out.println("\nAll the quotes by "+V+" are:");
         System.out.println("============================================");
         for (int n = 0; n < quoteIndex.size(); n++)
         {
@@ -111,6 +116,7 @@ public class QuotationStorage {
                 }
             }
       }
+        
         //swap method for sort
       public void swap(int first, int second) {
           //two swaps are performed, one to swap author list and the other to
