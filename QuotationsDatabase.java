@@ -39,7 +39,8 @@ public class QuotationsDatabase {
         File fileN = null;
         //file writer to store the quote list in a text file
         PrintWriter fileWriter1 = null;
-        
+        //intitalized constructor to modify the quotations array (add, remove, etc)
+        QuotationStorage quotes = new QuotationStorage();
 
         //error check to make sure file in given directory exists
         try{
@@ -62,8 +63,6 @@ public class QuotationsDatabase {
                 System.exit(0);
             }
         }	
-        
-        
         //Fills the storage and authors array list with respective info
         while(true)
         {
@@ -92,8 +91,8 @@ public class QuotationsDatabase {
         quoteReader1.close();
         
         
-        //intitalized constructor to modify the quotations array (add, remove, etc)
-        QuotationStorage quotes = new QuotationStorage(storage, authors);
+        quotes.setQuotes(storage);
+        quotes.setAuthors(authors);
         
         
         //if user clicks exit, user dialog will output 6, therefore the program exits
@@ -103,7 +102,7 @@ public class QuotationsDatabase {
 
             // DISPLAY ALL QUOTES
             if(userDialog == 0) {
-                if (quotes.storage.size() <= 0)
+                if (quotes.getQuotes().size() <= 0)
                 {
                     JOptionPane.showMessageDialog(null, "There are no quotes to randomly display!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -120,30 +119,30 @@ public class QuotationsDatabase {
             else if(userDialog == 1) {
                 //if file is empty, storage.size = 0, therefore this option wont work
                 //error guard to prevent user from using this function
-                if (quotes.storage.size() <= 0)
+                if (quotes.getQuotes().size() <= 0)
                 {
                     JOptionPane.showMessageDialog(null, "There are no quotes to randomly display!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
                     //rng variable stores random index value to choose a random quote
-                    int rng = (int) (Math.random() * quotes.storage.size());
+                    int rng = (int) (Math.random() * quotes.getQuotes().size());
                     System.out.println("\nRandomly selecting a quote:");
                     System.out.println("============================================");
-                    System.out.println(quotes.storage.get(rng));
+                    System.out.println(quotes.getQuotes().get(rng));
                     System.out.println("============================================");
                 }
             }
 
             // DISPLAY SELECTED QUOTE
             else if(userDialog == 2) {
-                if (quotes.storage.size() <= 0)
+                if (quotes.getQuotes().size() <= 0)
                 {
                     JOptionPane.showMessageDialog(null, "There are no quotes to select!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
-                    user = (String) JOptionPane.showInputDialog(null, "Which quote would you like to use?\nClick \"cancel\" to return to the main menu.", "Quotations Database", JOptionPane.PLAIN_MESSAGE, null, quotes.storage.toArray(), quotes.storage.get(0));
+                    user = (String) JOptionPane.showInputDialog(null, "Which quote would you like to use?\nClick \"cancel\" to return to the main menu.", "Quotations Database", JOptionPane.PLAIN_MESSAGE, null, quotes.getQuotes().toArray(), quotes.getQuotes().get(0));
                     if (user != null){
                     System.out.println("\nThe selected quote is:");
                     System.out.println("============================================");
@@ -156,7 +155,7 @@ public class QuotationsDatabase {
             //SEARCH BY AUTHOR
             else if (userDialog == 3)
             {
-                if (quotes.storage.size() <= 0)
+                if (quotes.getQuotes().size() <= 0)
                 {
                     JOptionPane.showMessageDialog(null,"There are no authors to select!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -165,7 +164,7 @@ public class QuotationsDatabase {
                     //generates list of authors for users to select from
                     quotes.authorIndex();
                     //user input
-                    authName = (String) JOptionPane.showInputDialog(null, "Please select the author of the quotes you are looking for.\nClick \"cancel\" to return to the main menu.", "Quotations Database", JOptionPane.PLAIN_MESSAGE, null, quotes.authIndex.toArray(), quotes.authIndex.get(0));
+                    authName = (String) JOptionPane.showInputDialog(null, "Please select the author of the quotes you are looking for.\nClick \"cancel\" to return to the main menu.", "Quotations Database", JOptionPane.PLAIN_MESSAGE, null, quotes.getAuthIndex().toArray(), quotes.getAuthIndex().get(0));
                     //gets list of quotes by the specified author
                     if (authName != null)
                     {
@@ -219,13 +218,13 @@ public class QuotationsDatabase {
 
             // REMOVE A QUOTE
             else if(userDialog == 5) {
-                if (quotes.storage.size() <= 0)
+                if (quotes.getQuotes().size() <= 0)
                 {
                     JOptionPane.showMessageDialog(null, "There are no quotes to remove!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
-                    removeInput =(String)JOptionPane.showInputDialog(null, "Which quote would you like to use?\nClick \"cancel\" to return to the main menu.", "Quotations Database", JOptionPane.PLAIN_MESSAGE, null, quotes.storage.toArray(), quotes.storage.get(0));
+                    removeInput =(String)JOptionPane.showInputDialog(null, "Which quote would you like to use?\nClick \"cancel\" to return to the main menu.", "Quotations Database", JOptionPane.PLAIN_MESSAGE, null, quotes.getQuotes().toArray(), quotes.getQuotes().get(0));
                     if (removeInput != null){
                         quotes.removeQuote(removeInput);
                     }
@@ -233,7 +232,7 @@ public class QuotationsDatabase {
             }
             else if (userDialog == 6)
             {
-                JOptionPane.showMessageDialog(null, "Database Guide", "Quotations Database", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, quotes.help(), "Quotations Database", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         fileNew = JOptionPane.showOptionDialog(null, "Would you like to save your changes?", "Quotations Database", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, yN, yN[1]);
@@ -241,12 +240,12 @@ public class QuotationsDatabase {
         {
             fileWriter1 = new PrintWriter(new FileWriter(location+fileName));
             //counter for quotes, stops loop when there are no more quotes to add
-            for (int j = 0; j < quotes.storage.size(); j++)
+            for (int j = 0; j < quotes.getQuotes().size(); j++)
             {
                 //adds a quote from quote arraylist
-                fileWriter1.println(quotes.storage.get(j));
+                fileWriter1.println(quotes.getQuotes().get(j));
                 //then adds its author from the author arraylist
-                fileWriter1.println("- "+quotes.authorList.get(j));
+                fileWriter1.println("- "+quotes.getAuthors().get(j));
             }
             //closes filewriter
             fileWriter1.close();

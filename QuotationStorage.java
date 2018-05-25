@@ -1,27 +1,45 @@
 package quotationsdatabase;
 
 import java.util.*;
-import javax.swing.*;
+
 
 public class QuotationStorage {
     private int indexNum;
     private String quoteStr;
+    private String output;
     //Arraylist to store index of authors
-    ArrayList<String> authIndex = new ArrayList();
+    private ArrayList<String> authIndex = new ArrayList();
     //arraylist for all quotes
-    ArrayList<String> storage = new ArrayList();
+    private ArrayList<String> storage = new ArrayList();
     //parralel arraylist to store authors for each quote individually
-    ArrayList<String> authorList = new ArrayList();
+    private ArrayList<String> authorList = new ArrayList();
     
-    //default constructor to fill arrayList's
-    public QuotationStorage(ArrayList<String> storage_, ArrayList<String> authorList_) {
-        storage = storage_;
-        authorList = authorList_;
+    public QuotationStorage() 
+    {
     }
-    
+    public void setQuotes(ArrayList<String> quotes)
+    {
+        storage = quotes;
+    }
+    public void setAuthors(ArrayList<String> authors)
+    {
+        authorList = authors;
+    }
+    public ArrayList<String> getQuotes()
+    {
+        return storage;
+    }
+    public ArrayList<String> getAuthIndex()
+    {
+        return authIndex;
+    }
+    public ArrayList<String> getAuthors()
+    {
+        return authorList;
+    }
     //toString to print all quotes out
     public String toString() {
-        String output = "";
+        output = "";
         for(int i = 0; i < storage.size(); i++) {
             output += "[" + i + "] " + storage.get(i)+"\n";
         }
@@ -75,7 +93,25 @@ public class QuotationStorage {
            }
        }
     }
-    
+    public String help()
+    {
+        output = "                                          ~Database Guide~";
+        output += "\n-When first running the program you must add"
+                + " a quote.\n\n-To add a quote, click the \"add a quote"
+                + "\" button then proceed to enter\nthe quote you would like to "
+                + "add in the window that opens. Hit enter and\nyou will be then "
+                + "prompted with another window to enter the author's name."; 
+        output += "\n\n-To remove a quote, click the \"remove a quote\" button then"
+                + " select a quote\nfrom the window that opens. Hit the \"enter\""
+                + " key or the \"ok\" button to\nconfirm your selection.\n";
+        output += "\n-To search for quotes by a specific author, click the \"search"
+                + "\" by author\nbutton then select one of the authors from the "
+                + "window that opens. Only\nauthors that are present in the database"
+                + " will be present in the list. After\nselecting an author, the"
+                + " quotes by that author will be printed in the output\nwindow.";
+
+        return output;
+    }
     //searches for quotes by author selected in prior method
     public void search(String V)
     {
