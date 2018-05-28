@@ -93,25 +93,7 @@ public class QuotationStorage {
            }
        }
     }
-    public String help()
-    {
-        output = "                                          ~Database Guide~";
-        output += "\n-When first running the program you must add"
-                + " a quote.\n\n-To add a quote, click the \"add a quote"
-                + "\" button then proceed to enter\nthe quote you would like to "
-                + "add in the window that opens. Hit enter and\nyou will be then "
-                + "prompted with another window to enter the author's name."; 
-        output += "\n\n-To remove a quote, click the \"remove a quote\" button then"
-                + " select a quote\nfrom the window that opens. Hit the \"enter\""
-                + " key or the \"ok\" button to\nconfirm your selection.\n";
-        output += "\n-To search for quotes by a specific author, click the \"search"
-                + "\" by author\nbutton then select one of the authors from the "
-                + "window that opens. Only\nauthors that are present in the database"
-                + " will be present in the list. After\nselecting an author, the"
-                + " quotes by that author will be printed in the output\nwindow.";
-
-        return output;
-    }
+ 
     //searches for quotes by author selected in prior method
     public void search(String V)
     {

@@ -32,7 +32,7 @@ public class QuotationsDatabase {
         //array to print yes/no options for input window
         String[] yN = {"Yes","No"};
         //array to display all main menu options for input window
-        String[] options = {"Display all quotes", "Display random quote", "Display selected quote", "Search by Author","Add a quote", "Remove a quote", "Help", "Exit"};
+        String[] options = {"Display all quotes", "Display random quote", "Display selected quote", "Search by Author","Add a quote", "Remove a quote","Exit"};
         //reader to read text file and add contents to arrayList
         BufferedReader quoteReader1 = null;
         //file to create new text file if one cannot be found
@@ -96,7 +96,7 @@ public class QuotationsDatabase {
         
         
         //if user clicks exit, user dialog will output 6, therefore the program exits
-        while(userDialog != 7) {
+        while(userDialog != options.length-1) {
             //main menu
             userDialog = JOptionPane.showOptionDialog(null, "Please choose an option", "Quotations Database", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
 
@@ -230,10 +230,8 @@ public class QuotationsDatabase {
                     }
                 }
             }
-            else if (userDialog == 6)
-            {
-                JOptionPane.showMessageDialog(null, quotes.help(), "Quotations Database", JOptionPane.INFORMATION_MESSAGE);
-            }
+
+
         }
         fileNew = JOptionPane.showOptionDialog(null, "Would you like to save your changes?", "Quotations Database", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, yN, yN[1]);
         if (fileNew == 0)
